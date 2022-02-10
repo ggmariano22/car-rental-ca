@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: 'car-rental-ca-network-nginx'
+    ports:
+      - '8001:80'
+      - '7001:443'
+    privileged: true
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/certs/certificate.crt:/etc/nginx/conf.d/certificate.crt
+      - ./docker/nginx/certs/certificate.key:/etc/nginx/conf.d/certificate.key
+      - ./docker/nginx/log:/var/log/nginx
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: 'car-rental-ca-network-php'
+    networks:
+      - default
+      - car-rental-ca-network
+    privileged: true
+    volumes:
+      - ./:/var/www
+      - ./docker/php/log:/var/log/php
+networks:
+  car-rental-ca-network:
