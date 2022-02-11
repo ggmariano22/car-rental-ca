@@ -1,16 +1,26 @@
 <?php
 
+namespace Domain\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="cars")
+ */
 class CarEntity
 {
     /**
-     * @var int
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue
      */
-    protected $id;
+    private $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    protected $description;
+    private $description;
 
     public function getId() {
         return $this->id;

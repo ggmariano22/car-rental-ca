@@ -10,37 +10,40 @@ class DoctrineORMFactory
     /**
      * @var array
      */
-    protected array $paths;
+    public array $paths;
 
     /**
      * @var array
      */
-    protected $dbParams;
+    public $dbParams;
 
     /**
      * @var boolean
      */
-    protected $isDevMode;
+    public $isDevMode;
 
     /**
      * @var EntityManager
      */
-    protected $entityManager;
+    public $entityManager;
 
     public function __construct() {
+        //var_dump(dirname(__DIR__, 3));exit;
+
         $this->paths = [
-            '/src'
+            dirname(__DIR__, 3),
         ];
         $this->isDevMode = getenv('APP_ENV') === 'development' ? true : false;
         // the connection configuration
         $this->dbParams = [
-            'driver'   => getenv('DOCTRINE_DRIVER'),
-            'user'     => getenv('DOCTRINE_USER'),
-            'password' => getenv('DOCTRINE_PWD'),
-            'dbname'   => getenv('DOCTRINE_DBNAME'),
+            'driver'   => 'pdo_mysql',
+            'user'     => 'root',
+            'password' => 'root',
+            'dbname'   => 'car-rental-ca',
+            'host'     => 'localhost'
         ];
         
-        $config = Setup::createAnnotationMetadataConfiguration($this->paths, $this->isDevMode);
+        $config = Setup::createAnnotationMetadataConfiguration($this->paths, $this->isDevMode, useSimpleAnnotationReader: false);
         $this->entityManager = EntityManager::create($this->dbParams, $config);
     }
 

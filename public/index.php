@@ -9,7 +9,8 @@ require '../bootstrap.php';
 $app = AppFactory::create();
 
 $app->group('/api/v1', function ($app) {
-    $app->get('/cars', ListCarsHandler::class . ':getCars');
+    $app->get('/cars', ListCarsHandler::class . ':get');
+    $app->post('/cars', ListCarsHandler::class . ':create');
 });
 
 $app->run();

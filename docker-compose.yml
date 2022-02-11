@@ -29,3 +29,4 @@ services:
       - ./docker/php/log:/var/log/php
 networks:
   car-rental-ca-network:
+    external: true

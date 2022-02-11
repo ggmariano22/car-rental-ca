@@ -1,1 +1,4 @@
 /vendor/
+
+/docker/nginx/log/
+/docker/php/log/
