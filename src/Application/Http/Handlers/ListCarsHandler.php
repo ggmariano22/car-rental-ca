@@ -4,15 +4,14 @@ namespace Application\Http\Handlers;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Container\ContainerInterface;
 use Domain\Service\CarService;
 
 class ListCarsHandler extends AbstractHandler
 {
-    private CarService $carService;
-
-    public function __construct()
-    {
-        $this->carService = new CarService();
+    public function __construct(
+        private CarService $carService
+    ) {
     }
 
     public function get(Request $request, Response $response) {

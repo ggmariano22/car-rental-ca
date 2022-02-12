@@ -19,10 +19,10 @@
         "slim/slim": "4.x",
         "slim/psr7": "^1.5",
         "doctrine/orm": "2.11.1",
-        "php-di/php-di": "*",
         "vlucas/phpdotenv": "^5.4",
         "symfony/cache": "^6.0",
         "doctrine/annotations": "^1.13",
-        "doctrine/dbal": "^3.3"
+        "doctrine/dbal": "^3.3",
+        "php-di/php-di": "*"
     }
 }

@@ -2,18 +2,16 @@
 
 namespace Domain\Service;
 
-use Infrastructure\Factory\Doctrine\DoctrineORMFactory;
+use Infrastructure\Doctrine\Factory\DoctrineORMFactory;
+use Infrastructure\Doctrine\DoctrineInterface;
 use Domain\Entity\CarEntity;
 
 class CarService
 {
-    public $carEntity;
-    public $entityManager;
-
-    public function __construct()
-    {
-        $this->carEntity = new CarEntity();
-        $this->entityManager = new DoctrineORMFactory();
+    public function __construct(
+        private CarEntity $carEntity,
+        private DoctrineInterface $entityManager
+    ) {
     }
 
     public function createCar(array $params)

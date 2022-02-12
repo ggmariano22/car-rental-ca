@@ -1,11 +1,12 @@
 <?php
 
-namespace Infrastructure\Factory\Doctrine;
+namespace Infrastructure\Doctrine\Factory;
 
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Infrastructure\Doctrine\DoctrineInterface;
 
-class DoctrineORMFactory
+class DoctrineORMFactory implements DoctrineInterface
 {
     /**
      * @var array
