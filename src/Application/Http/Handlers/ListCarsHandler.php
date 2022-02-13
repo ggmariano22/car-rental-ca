@@ -18,9 +18,7 @@ class ListCarsHandler extends AbstractHandler
         $response->getBody()->write(json_encode([
             'success' => true,
             'status' => 200,
-            'data' => [
-                'cars' => ['FordKa', 'Gol', 'Uno', 'Zafira', 'Corcel']
-            ]
+            'cars' => $this->carService->listCars()
         ]));
 
         return $response
