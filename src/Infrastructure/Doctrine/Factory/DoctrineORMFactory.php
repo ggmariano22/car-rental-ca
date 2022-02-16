@@ -41,7 +41,7 @@ class DoctrineORMFactory implements DoctrineInterface
             'user'     => 'root',
             'password' => 'root',
             'dbname'   => 'car-rental-ca',
-            'host'     => 'localhost'
+            'host'     => '172.24.0.2'
         ];
         
         $config = Setup::createAnnotationMetadataConfiguration($this->paths, $this->isDevMode, useSimpleAnnotationReader: false);

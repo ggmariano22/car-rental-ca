@@ -1,6 +1,6 @@
 <?php
 
-use Infrastructure\Factory\Doctrine\DoctrineORMFactory;
+use Infrastructure\Doctrine\Factory\DoctrineORMFactory;
 
 $entityManager = new DoctrineORMFactory();
 return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager->getEntityManager());

@@ -1,11 +1,25 @@
 version: '3.2'
 
 services:
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: car-rental-ca-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: car-rental-ca
+      MYSQL_PASSWORD: car-rental-ca
+      MYSQL_DATABASE: car-rental-ca
+    volumes:
+      - ./:/var/www
+    networks:
+      - car-rental-ca-network
   nginx:
     build:
       context: .
       dockerfile: ./docker/nginx/Dockerfile
-    container_name: 'car-rental-ca-network-nginx'
+    container_name: 'car-rental-ca-nginx'
     ports:
       - '8001:80'
       - '7001:443'
@@ -19,7 +33,7 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
-    container_name: 'car-rental-ca-network-php'
+    container_name: 'car-rental-ca-php'
     networks:
       - default
       - car-rental-ca-network
