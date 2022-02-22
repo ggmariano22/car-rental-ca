@@ -2,5 +2,6 @@
 
 use Infrastructure\Doctrine\Factory\DoctrineORMFactory;
 
-$entityManager = new DoctrineORMFactory();
+$container = require('./config/dependency.php');
+$entityManager = new DoctrineORMFactory($container);
 return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager->getEntityManager());

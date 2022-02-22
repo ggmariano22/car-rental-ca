@@ -24,5 +24,8 @@
         "doctrine/annotations": "^1.13",
         "doctrine/dbal": "^3.3",
         "php-di/php-di": "*"
+    },
+    "config": {
+        "bin-dir": "bin/"
     }
 }

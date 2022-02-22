@@ -4,7 +4,7 @@ namespace Application\Http\Handlers;
 
 class AbstractHandler
 {
-    public function getAttributes(string $json)
+    public function getData(string $json)
     {
         return json_decode(
             $json,

@@ -1,5 +1,7 @@
 FROM php:8.0.6-fpm-alpine
 
+WORKDIR /var/www
+
 RUN apk add --no-cache --virtual .deps \
     autoconf \
     make \
@@ -31,9 +33,7 @@ RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS \
 
 RUN apk del .deps
 
-COPY . /var/www
-
-WORKDIR /var/www
+COPY . .
 
 RUN chmod +x composer.phar
 

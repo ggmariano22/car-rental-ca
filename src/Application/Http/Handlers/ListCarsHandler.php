@@ -23,7 +23,21 @@ class ListCarsHandler extends AbstractHandler
 
         return $response
         ->withHeader('Content-Type', 'application/json')
-        ->withStatus(201);
+        ->withStatus(200);
+    }
+
+    public function getById(Request $request, Response $response) {
+        $response->getBody()->write(json_encode([
+            'success' => true,
+            'status' => 200,
+            'car' => $this->carService->getById(
+                (int) $request->getAttribute('id')
+            )
+        ]));
+
+        return $response
+        ->withHeader('Content-Type', 'application/json')
+        ->withStatus(200);
     }
 
     public function create(Request $request, Response $response)
@@ -31,7 +45,7 @@ class ListCarsHandler extends AbstractHandler
         $response->getBody()->write(json_encode([
             'success' => true,
             'message' => $this->carService->createCar(
-                $this->getAttributes($request->getBody()->getContents())
+                $this->getData($request->getBody()->getContents())
             )
         ]));
 

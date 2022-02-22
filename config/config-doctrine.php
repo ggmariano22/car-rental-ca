@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'isDevMode' => getenv('APP_ENV') === 'development' ? true : false,
+    'isDevMode' => false,
     'paths'     => [
         dirname(__DIR__, 3)
     ],
     'dbParams' => [
-        'driver'    => getenv('DOCTRINE_DRIVER'),
-        'user'      => getenv('DOCTRINE_USER'),
-        'password'  => getenv('DOCTRINE_PWD'),
-        'dbname'    => getenv('DOCTRINE_DBNAME'),
-        'host'      => getenv('DOCTRINE_HOST')
+        'driver'    => 'pdo_mysql',
+        'user'      => 'car-rental-ca',
+        'password'  => 'car-rental-ca',
+        'dbname'    => 'car-rental-ca',
+        'host'      => '172.24.0.2'
     ]
 ];
