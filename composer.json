@@ -3,6 +3,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
+            "CarRentalCA\\": "src/",
             "Application\\": "src/Application/",
             "Domain\\": "src/Domain/",
             "Infrastructure\\": "src/Infrastructure/"

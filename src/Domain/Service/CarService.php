@@ -2,45 +2,16 @@
 
 namespace Domain\Service;
 
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ObjectRepository;
-use Infrastructure\Doctrine\DoctrineInterface;
-use Domain\Entity\CarEntity;
+use CarRentalCA\Infrastructure\Database\DatabaseInterface;
 
-class CarService extends CarsAbstractService
+class CarService
 {
-    private EntityManager $entityManager;
-    private EntityRepository $carsRepository;
-
-    public function __construct(
-        private CarEntity $carEntity,
-        private DoctrineInterface $doctrineInterface
-    ) {
-        $this->entityManager  = $doctrineInterface->getEntityManager();
-        $this->carsRepository = $this->entityManager->getRepository(CarEntity::class);
+    public function __construct(private DatabaseInterface $database)
+    {
     }
 
-    public function createCar(array $params)
+    public function create(array $data = [])
     {
-        $this->carEntity->setName($params['name']);
-        $this->carEntity->setDescription($params['description']);
-        $this->carEntity->setBrand($params['brand']);
-        $this->carEntity->setCapacity($params['capacity']);
-
-        $this->entityManager->persist($this->carEntity);
-        $this->entityManager->flush();
-        
-        return 'Car created with ID ' . $this->carEntity->getId();
-    }
-
-    public function listCars()
-    {
-        return $this->extractData($this->carsRepository->findAll());
-    }
-
-    public function getById(int $id)
-    {
-        return $this->carsRepository->find($id)?->toArray();
+        return $this->database->insert($data);
     }
 }

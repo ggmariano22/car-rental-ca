@@ -3,30 +3,34 @@
 use DI\Container;
 use Psr\Container\ContainerInterface;
 use Application\Http\Handlers\ListCarsHandler;
-use Infrastructure\Doctrine\DoctrineInterface;
-use Infrastructure\Doctrine\Factory\DoctrineORMFactory;
+use CarRentalCA\Infrastructure\Database\DatabaseInterface;
+use CarRentalCA\Infrastructure\Database\PDO\Database;
+use CarRentalCA\Infrastructure\Database\PDO\Factory\DatabasePDOFactory;
 use Domain\Service\CarService;
 use Domain\Entity\CarEntity;
 
-$config = require('config-doctrine.php');
+$config = require('database-config.php');
 $container = new Container();
 
-$container->set('doctrineConfig', function(ContainerInterface $container) use ($config) {
+$container->set('database_config', function(ContainerInterface $container) use ($config) {
     return $config;
 });
 
-$container->set(DoctrineInterface::class, function(ContainerInterface $container) {
-    return new DoctrineORMFactory($container);
+$container->set(DatabasePDOFactory::class, function(ContainerInterface $container) {
+    return DatabasePDOFactory::create(
+        $container->get('database_config')
+    );
 });
 
-$container->set(CarEntity::class, function(ContainerInterface $container) {
-    return new CarEntity();
+$container->set(DatabaseInterface::class, function(ContainerInterface $container) {
+    return new Database(
+        $container->get(DatabasePDOFactory::class)
+    );
 });
 
 $container->set(CarService::class, function(ContainerInterface $container) {
     return new CarService(
-        $container->get(CarEntity::class),
-        $container->get(DoctrineInterface::class)
+        $container->get(DatabaseInterface::class)
     );
 });
 
